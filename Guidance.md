@@ -19,7 +19,7 @@
 
 打开AML Workbench，创建一个空的项目。AML Workbench将会为我们创建一些必须的文件。默认创建的文件目录如下：
 
-![benchtree](benchtree.PNG)
+![benchtree](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/benchtree.PNG)
 
 这里我们关注`score.py`文件，`train.py`可以用于训练自己的模型，这里使用预训练模型所以不需要此文件。
 
@@ -246,7 +246,7 @@ dependencies:
 az login
 ```
 
-![azacount](azacount.PNG)
+![azacount](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/azacount.PNG)
 
 步骤2.注册环境提供程序。依次执行如下命令，可依据输出提示查看进度，设置完成需要约1-3分钟世界。
 
@@ -256,7 +256,7 @@ az provider register -n Microsoft.ContainerRegistry
 az provider register -n Microsoft.ContainerService
 ```
 
-![env](env.PNG)
+![env](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/env.PNG)
 
 上图显示了执行第一行命令并查询进度的结果，当**registrationState**字段显示为**Registered**后可执行后续操作。后两条命令类似。
 
@@ -281,15 +281,15 @@ az ml env show -n <deployment environment name> -g <existing resource group name
 - Azure 容器注册表 (ACR)
 - Application Insights 帐户
 
-![setupenv](setupenv.PNG)
+![setupenv](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/setupenv.PNG)
 
 下图显示正在创建中：
 
-![createenv](createenv.PNG)
+![createenv](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/createenv.PNG)
 
 下图显示创建成功：
 
-![createsucce](createsucce.PNG)
+![createsucce](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/createsucce.PNG)
 
 步骤4.创建模型管理帐户,随后设置模型管理帐户。
 
@@ -335,7 +335,7 @@ az ml service create realtime -f score.py --model-file outputs\myresnet.h5 -s se
 
 在部署过程中，会在本地计算机上创建 Web 服务的 HTTP REST 终结点。 几分钟后，该命令会完成并返回成功消息。 Web 服务已准备好运行！
 
-![realtime](realtime.PNG)
+![realtime](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/realtime.PNG)
 
 请注意此命令执行完成后的**输出**，上图创建成功以后会有一个用法提示，由于Base64字符串太长，请在控制台输出中仔细查看。
 
@@ -345,7 +345,7 @@ az ml service create realtime -f score.py --model-file outputs\myresnet.h5 -s se
 az ml service usage realtime -i demo
 ```
 
-![usage](usage.PNG)
+![usage](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/usage.PNG)
 
 输出中包含了HTTP REST终结点，请记下此URL路径和端口，如果是在DSVM中创建Docker，请在Azure中开启此虚拟机的对应输入端口，否则将不能在外部访问。
 
@@ -355,7 +355,7 @@ az ml service usage realtime -i demo
 docker ps
 ```
 
-![ps](ps.PNG)
+![ps](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/ps.PNG)
 
 步骤7.测试API。
 
@@ -375,7 +375,7 @@ docker ps
 
 测试结果如下:
 
-![test](test.PNG)
+![test](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/test.PNG)
 
 至此，在Docker中创建API的任务完成，下面将使用集群发布API。
 
@@ -412,13 +412,17 @@ az ml env setup --cluster -l southeastasia -n democluster -g democlusterrg
 - Azure 容器服务 (ACS) 群集上的 Kubernetes 部署
 - Application Insights 帐户
 
-![](clustercreate.png)
+![](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/clustercreate.PNG)
 
 要检查当前正在进行的群集调配的状态，请使用以下命令：
 
 ```
 az ml env show -n [environment name] -g [resource group]
 ```
+
+![](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/success.PNG)
+
+创建成功后进行下一步操作。
 
 步骤4.创建模型管理帐户,随后设置模型管理帐户。
 
@@ -440,7 +444,7 @@ az ml account modelmanagement set -n <youracctname> -g <yourresourcegroupname>
 az ml service create realtime -f score.py --model-file myresnet.h5 -s service_schema.json -n democluster -r python -c conda_dependencies.yml
 ```
 
-![](clusterrealtime.png)
+![](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/clusterrealtime.PNG)
 
 上一条命令输出的最后提示了一条命令来查看服务运行情况,执行这条命令。
 
@@ -448,11 +452,11 @@ az ml service create realtime -f score.py --model-file myresnet.h5 -s service_sc
 az ml service usage realtime -i democluster.democluster-a6809202.southeastasia
 ```
 
-![](clusterusage.png)
+![](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/clusterusage.PNG)
 
 上一条命令将输出一个API调用的实例，请注意命令靠前部分的输出，为了保护API，访问将需要一个service key，如何获取service key，将在输出中提示。因为输出中包含了一个输入例子，Base64字符串将会很长，请在命令行中仔细查看。
 
-![](clustersample.png)
+![](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/clustersample.PNG)
 
 此处使用这条命令获取service key
 
@@ -460,7 +464,7 @@ az ml service usage realtime -i democluster.democluster-a6809202.southeastasia
 az ml service keys realtime -i democluster.democluster-a6809202.southeastasia
 ```
 
-![](key.png)
+![](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/key.PNG)
 
 请记录输出的两个Key,使用时取其任意一个即可。
 
@@ -470,16 +474,16 @@ az ml service keys realtime -i democluster.democluster-a6809202.southeastasia
 
 请求body同第一部分。
 
-![](postheader.png)
+![](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/postheader.PNG)
 
 请注意上图中Authorization字段值的设置需要设置为'**Bearer **'+Key。
 
-![](clustercall.png)
+![](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/clustercall.PNG)
 
 上图显示请求成功调用。
 
 打开Azure门户，可以看到所创建的集群资源，如果不再需要请删除对应服务。
 
-![](clusterazure.png)
+![](https://raw.githubusercontent.com/Iamnvincible/AMLGuidance/master/shot/clusterazure.PNG)
 
 至此，在集群中创建API的任务完成，感谢阅读。
