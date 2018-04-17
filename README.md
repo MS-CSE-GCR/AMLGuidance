@@ -1,6 +1,6 @@
 # Azure Machine Learning Workbench Guidance
 
->本文介绍了如何使用AML Workbench，利用预训练的深度学习模型在Azure上部署基于Docker/Kubernets集群的RESTful API服务。
+>本文介绍了如何使用AML Workbench，利用预训练的深度学习模型(Keras H5 model)在Azure上部署基于Docker/Kubernets集群的RESTful API服务，包括API封装，Docker Image生成，环境配置和部署。
 
 ## 开始之前
 请确保能满足如下条件并安装相应软件：
